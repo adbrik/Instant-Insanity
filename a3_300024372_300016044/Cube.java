@@ -1,9 +1,5 @@
 public class Cube{
 
-	public enum Color{
-		BLUE, GREEN, RED, WHITE
-	}
-
 	private Color[] faces;
 	private final Color[] IDENTITY;
 	private int nbreOfRotations;
@@ -12,6 +8,10 @@ public class Cube{
 		this.faces = faces;
 		this.IDENTITY = new Color[]{faces[0],faces[1],faces[2],faces[3],faces[4],faces[5]};
 		this.nbreOfRotations = 0;
+	}
+
+	public Cube(Cube other){
+		this(other.copy().faces);
 	}
 
 	public Color getUp(){
@@ -40,6 +40,15 @@ public class Cube{
 
 	public String toString(){
 		return ("["+ faces[0]+", "+ faces[1]+", "+ faces[2]+", "+ faces[3]+", "+ faces[4]+", "+ faces[5] +"]");
+	}
+
+	public Cube copy(){
+		Color[] nfaces = new Color[faces.length];
+		for (int i =0; i < faces.length; i++){
+			nfaces[i] = faces[i];
+		}
+		Cube copy = new Cube(nfaces);
+		return copy;
 	}
 
 	public boolean hasNext(){
@@ -125,27 +134,4 @@ public class Cube{
 		}
 		nbreOfRotations = 0;
 	}
-
-
-
-	public static void main(String[] args) {
-		Cube c;
-		c = new Cube(new Color[]{Color.BLUE,Color.GREEN,Color.WHITE,Color.GREEN,Color.BLUE,Color.RED});
-
-		c.reset();
-		while (c.hasNext()){
-			c.next();
-			System.out.println(c);
-		}
-
-		System.out.println("reset: ");
-		c.reset();
-		while (c.hasNext()){
-			c.next();
-			System.out.println(c);
-		}
-
-	}
-
-
 }
