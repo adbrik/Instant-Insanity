@@ -14,6 +14,10 @@ public class Cube{
 		this(other.copy().faces);
 	}
 
+	public Color getColor(int pos){
+		return faces[pos];
+	}
+
 	public Color getUp(){
 		return faces[0];
 	}

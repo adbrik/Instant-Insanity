@@ -29,11 +29,50 @@ public class Solution{
 	}
 
 	public boolean isValid(){
-		return;
+		Color[] temp = new Color[this.cubes.length];
+		boolean status = true;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < this.cubes.length; j++){
+				temp[j] = cubes[j].getColor(i + 1);
+			}
+			for (int j = 0; j < this.cubes.length; j++){
+				for (int k = 1; k < this.cubes.length -j;k++){
+					if (temp[j] == temp[k]){
+						status = false;
+						break;
+					}
+				}
+				if (!(status))
+					break;
+			}
+			if (!(status))
+				break;
+		}
+		return status;
 	}
 
 	public boolean isValid(Cube next){
-		return false;
+		Color[] temp = new Color[this.cubes.length+1];
+		boolean status = true;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < this.cubes.length; j++){
+				temp[j] = cubes[j].getColor(i + 1);
+			}
+			temp[this.cubes.length] = next.getColor(i+1);
+			for (int j = 0; j < this.cubes.length + 1; j++){
+				for (int k = 1; k < this.cubes.length + 1 -j;k++){
+					if (temp[j] == temp[k]){
+						status = false;
+						break;
+					}
+				}
+				if (!(status))
+					break;
+			}
+			if (!(status))
+				break;
+		}
+		return status;
 	}
 
 	public String toString(){
