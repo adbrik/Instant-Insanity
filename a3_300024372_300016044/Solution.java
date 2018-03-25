@@ -1,13 +1,14 @@
 public class Solution{
 
-	Cube[] cubes;
+	private Cube[] cubes;
+	private int numberOfCalls;
 	
 	public Solution(Cube[] cubes){
 		this.cubes = new Cube[cubes.length];
 		for (int i = 0 ; i < cubes.length; i ++){
 			this.cubes[i] = new Cube(cubes[i]);
 		}
-
+		numberOfCalls = 0;
 	}
 
 	public Solution(Solution other, Cube c){
@@ -18,6 +19,7 @@ public class Solution{
 		}
 		newCubes[i+1] = new Cube(c);
 		cubes = newCubes;
+		numberOfCalls = 0;
 	}
 
 	public int size(){
@@ -29,6 +31,7 @@ public class Solution{
 	}
 
 	public boolean isValid(){
+		numberOfCalls++;
 		Color[] temp = new Color[this.cubes.length];
 		boolean status = true;
 		for (int i = 0; i < 4; i++) {
@@ -52,6 +55,7 @@ public class Solution{
 	}
 
 	public boolean isValid(Cube next){
+		numberOfCalls++;
 		Color[] temp = new Color[this.cubes.length+1];
 		boolean status = true;
 		for (int i = 0; i < 4; i++) {
@@ -73,6 +77,14 @@ public class Solution{
 				break;
 		}
 		return status;
+	}
+
+	public int getNumberOfCalls(){
+		return numberOfCalls;
+	}
+
+	public void resetNumberOfCalls(){
+		numberOfCalls=0;
 	}
 
 	public String toString(){
