@@ -29,6 +29,7 @@ public class Solve{
         				}
         				sol.getCube(3).next(); 
 	    				if (sol.isValid()){
+	    					System.out.println(sol);
 	    					queue.enqueue(sol);
 	    				}
 	    			}
@@ -59,14 +60,13 @@ public class Solve{
 	        	}
 	        	all.getCube(current.size()).next();
 	        	if (current.isValid(all.getCube(current.size()))){
-	        		current = new Solution(current,all.getCube(current.size()));
-	        		if (current.size() == 4){
-	        			System.out.println(current);
-	        			solutions.enqueue(current);
+	        		if (current.size() == 3){
+	        			System.out.println(new Solution(current,all.getCube(current.size())));
+	        			solutions.enqueue(new Solution(current,all.getCube(current.size())));
 	        			break;
 	        		}
 	        		else{
-	        			open.enqueue(current);
+	        			open.enqueue(new Solution(current,all.getCube(current.size())));
 	        		}
 	        	}
     		}
