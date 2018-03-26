@@ -39,7 +39,11 @@ public class Solution{
 				temp[j] = cubes[j].getColor(i + 1);
 			}
 			for (int j = 0; j < this.cubes.length; j++){
-				for (int k = 1; k < this.cubes.length -j;k++){
+				// System.out.println("______");
+				// System.out.println(temp[j]);
+				// System.out.println("--===--");
+				for (int k = j+1; k < this.cubes.length;k++){
+					// System.out.println(temp[k]);
 					if (temp[j] == temp[k]){
 						status = false;
 						break;
@@ -47,7 +51,10 @@ public class Solution{
 				}
 				if (!(status))
 					break;
+
 			}
+			// System.out.println("---");
+			// System.out.println(status);
 			if (!(status))
 				break;
 		}
