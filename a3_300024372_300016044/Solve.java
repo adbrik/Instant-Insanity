@@ -30,24 +30,73 @@ public class Solve{
         				sol.getCube(3).next(); 
 	    				if (sol.isValid()){
 	    					queue.enqueue(sol);
-	    					System.out.println("-------");
-	    					System.out.println(sol);
 	    				}
 	    			}
 	    		}
     		}
     	}
-    	System.out.println(sol.getNumberOfCalls());
     	return queue;
     }
 
-   // public Queue<Solution> breadthFirstSearch (){
+    public Queue<Solution> breadthFirstSearch (){
+    	Queue<Solution>open=new LinkedQueue<Solution>();
+    	Queue<Solution>solutions=new LinkedQueue<Solution>();
+    	Solution current = new Solution(new Cube[]{c1});
+    	Solution all = new Solution(new Cube[]{c1,c2,c3,c4});
+    	current.resetNumberOfCalls();
+    	for (int i = 0; i < 24; i ++){
+    		if(!current.getCube(0).hasNext()){
+          		current.getCube(0).reset();
+        	}
+        	current.getCube(0).next();
+    		open.enqueue(new Solution(new Cube[]{current.getCube(0)}));
+    	}
+    	while (!open.isEmpty()){
+    		current = open.dequeue();
+    		for (int i = 0; i < 24; i ++){
+	    		if(!all.getCube(current.size()).hasNext()){
+	          		all.getCube(current.size()).reset();
+	        	}
+	        	all.getCube(current.size()).next();
+	        	if (current.isValid(all.getCube(current.size()))){
+	        		current = new Solution(current,all.getCube(current.size()));
+	        		if (current.size() == 4){
+	        			System.out.println(current);
+	        			solutions.enqueue(current);
+	        			break;
+	        		}
+	        		else{
+	        			open.enqueue(current);
+	        		}
+	        	}
+    		}
 
-    //}
+    	}
+    	return solutions;
+    }
 
 	public static void main(String[] args) {
-		Solve a=new Solve();
-    	a.generateAndTest();
+		Solve a = new Solve();
+
+		long start, stop;
+
+		System.out.println("generateAndTest:");
+		start = System.currentTimeMillis();
+
+		a.generateAndTest();
+
+		stop = System.currentTimeMillis();
+		System.out.println("Elapsed time: " + (stop - start) + " milliseconds");
+
+		System.out.println("breadthFirstSearch:");
+
+		start = System.currentTimeMillis();
+
+		a.breadthFirstSearch();
+
+		stop = System.currentTimeMillis();
+		System.out.println("Elapsed time: " + (stop - start) + " milliseconds");
+
 
 	}	
 

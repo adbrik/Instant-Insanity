@@ -15,9 +15,9 @@ public class Solution{
 		Cube[] newCubes = new Cube[other.cubes.length + 1];
 		int i;
 		for (i = 0; i<other.cubes.length;i++){
-			newCubes[i] = new Cube(other.cubes[i]);
+		 	newCubes[i] = new Cube(other.cubes[i]);
 		}
-		newCubes[i+1] = new Cube(c);
+		newCubes[i] = new Cube(c);
 		cubes = newCubes;
 		numberOfCalls = 0;
 	}
@@ -39,11 +39,7 @@ public class Solution{
 				temp[j] = cubes[j].getColor(i + 1);
 			}
 			for (int j = 0; j < this.cubes.length; j++){
-				// System.out.println("______");
-				// System.out.println(temp[j]);
-				// System.out.println("--===--");
 				for (int k = j+1; k < this.cubes.length;k++){
-					// System.out.println(temp[k]);
 					if (temp[j] == temp[k]){
 						status = false;
 						break;
@@ -51,10 +47,7 @@ public class Solution{
 				}
 				if (!(status))
 					break;
-
 			}
-			// System.out.println("---");
-			// System.out.println(status);
 			if (!(status))
 				break;
 		}
@@ -71,7 +64,7 @@ public class Solution{
 			}
 			temp[this.cubes.length] = next.getColor(i+1);
 			for (int j = 0; j < this.cubes.length + 1; j++){
-				for (int k = 1; k < this.cubes.length + 1 -j;k++){
+				for (int k = j + 1; k < this.cubes.length + 1;k++){
 					if (temp[j] == temp[k]){
 						status = false;
 						break;
